@@ -445,16 +445,21 @@ def main():
             
             time.sleep(3)
 
-        
-        
-        
 
 
-        a = random.randint(0, len(characters) - 2)
-        opp = characters[a]
-        if opp not in meeted_opponents and opp != user_character:
-            meeted_opponents.update()
-            z = fight(user_character, characters[a])
+
+
+        
+
+        
+        num = 0
+        while num != 1:
+            a = random.randint(0, len(characters) - 2)
+            opp = characters[a]
+            if opp not in meeted_opponents and opp != user_character:
+                meeted_opponents.update()
+                z = fight(user_character, characters[a])
+                num = 1
 
         if z == 1:
             num = 0
@@ -467,9 +472,6 @@ def main():
                     display_print("Бой номер 2")
                     k = fight(user_character, characters[a])
                     num = 1
-                
-                else:
-                    num = 0
             
             if k == 1:
                 display_print("Ваш \"великолепный приз\" - похвала. Спасибо, что сыграли!!!")
@@ -489,8 +491,6 @@ def main():
     else:
         display_print("Вы не достоины играть в DOTA 0.5")
     
-
-
 
 
 
