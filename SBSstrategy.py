@@ -1,6 +1,8 @@
-
+import json
 import time
 import random
+import os
+from csv import writer
 
 
 def clear_screen():
@@ -98,158 +100,31 @@ def atk(opp_type_atk, opp_hp, dmg, melee_dmg, range_dmg, magic_dmg, points):
             return opp_hp, points
 
 
-def fight(us_char, opp_char ):
-    if opp_char == "Drow Ranger":
-        opp_hp = 700
-        opp_dmg = 180
-        opp_melee_dmg = 0.75
-        opp_range_dmg = 1.25
-        opp_magic_dmg = 1.25
-        opp_type_atk = "range"
-        opp_hold_cost = 3
+def fight(us_char, opp_char):
+    characters = {"Drow Ranger":[1400, 180, 0.75, 1.25, 1.25, "range", 3],
+              "Sven":[2020, 130, 1.5, 0.75, 1, "melee", 2],
+              "Slark":[2200, 100, 0.75, 1.25, 1, "melee", 1],
+              "Zeus":[1000, 210, 1.25, 0.75, 1, "magic", 3],
+              "Wraith King":[2400, 90, 1, 1, 1, "melee", 2],
+              "Axe":[2500, 95, 1.25, 0.9, 0.9, "melee", 2],
+              "Sniper":[1400, 140, 1.29, 0.8, 1.2, "range", 1],
+              "Necrophos":[1850, 105, 1.26, 1.2, 0.8, "magic", 4]}
 
-    elif opp_char == "Sven":
-        opp_hp = 1010
-        opp_dmg = 130
-        opp_melee_dmg = 1.5
-        opp_range_dmg = 0.75
-        opp_magic_dmg = 1
-        opp_type_atk = "melee"
-        opp_hold_cost = 2
+    hp = characters[us_char][0]
+    dmg = characters[us_char][1]
+    melee_dmg = characters[us_char][2]
+    range_dmg = characters[us_char][3]
+    magic_dmg = characters[us_char][4]
+    type_atk = characters[us_char][5]
+    hold_cost = characters[us_char][6]
 
-    elif opp_char == "Slark":
-        opp_hp = 1100
-        opp_dmg = 100
-        opp_melee_dmg = 0.75
-        opp_range_dmg = 1.25
-        opp_magic_dmg = 1
-        opp_type_atk = "melee"
-        opp_hold_cost = 1
-
-    elif opp_char == "Zeus":
-        opp_hp = 500
-        opp_dmg = 230
-        opp_melee_dmg = 1.25
-        opp_range_dmg = 0.75
-        opp_magic_dmg = 1
-        opp_type_atk = "magic"
-        opp_hold_cost = 4
-
-    elif opp_char == "Wraith King":
-        opp_hp = 1200
-        opp_dmg = 90
-        opp_melee_dmg = 1
-        opp_range_dmg = 1
-        opp_magic_dmg = 1
-        opp_type_atk = "melee"
-        opp_hold_cost = 2
-
-    elif opp_char == "Axe":
-        opp_hp = 1500
-        opp_dmg = 95
-        opp_melee_dmg = 1.25
-        opp_range_dmg = 0.9
-        opp_magic_dmg = 0.9
-        opp_type_atk = "melee"
-        opp_hold_cost = 2
-
-    elif opp_char == "Sniper":
-        opp_hp = 700
-        opp_dmg = 140
-        opp_melee_dmg = 1.29
-        opp_range_dmg = 0.8
-        opp_magic_dmg = 1.2
-        opp_type_atk = "range"
-        opp_hold_cost = 1
-
-    elif opp_char == "Necrophos":
-        opp_hp = 925
-        opp_dmg = 105
-        opp_melee_dmg = 1.26
-        opp_range_dmg = 1.2
-        opp_magic_dmg = 0.8
-        opp_type_atk = "magic"
-        opp_hold_cost = 5
-        
-
-
-
-
-    
-    if us_char == "Drow Ranger":
-        hp = 700
-        dmg = 200
-        melee_dmg = 1
-        range_dmg = 1.50
-        magic_dmg = 1.50
-        type_atk = "range"
-        hold_cost = 3
-
-
-    elif us_char == "Sven":
-        hp = 1010
-        dmg = 130
-        melee_dmg = 1.5
-        range_dmg = 0.75
-        magic_dmg = 1
-        type_atk = "melee"
-        hold_cost = 2
-
-    elif us_char == "Slark":
-        hp = 1100
-        dmg = 110
-        melee_dmg = 0.75
-        range_dmg = 1.25
-        magic_dmg = 1
-        type_atk = "melee"
-        hold_cost = 1
-
-    elif us_char == "Zeus":
-        hp = 500
-        dmg = 230
-        melee_dmg = 1.25
-        range_dmg = 0.75
-        magic_dmg = 1
-        type_atk = "magic"
-        hold_cost = 4
-
-    elif us_char == "Wraith King":
-        hp = 1200
-        dmg = 90
-        melee_dmg = 1
-        range_dmg = 1
-        magic_dmg = 1
-        type_atk = "melee"
-        hold_cost = 2
-
-    elif us_char == "Axe":
-        hp = 1500
-        dmg = 95
-        melee_dmg = 1.25
-        range_dmg = 0.9
-        magic_dmg = 0.9
-        type_atk = "melee"
-        hold_cost = 2
-
-    elif us_char == "Sniper":
-        hp = 700
-        dmg = 140
-        melee_dmg = 1.29
-        range_dmg = 0.8
-        magic_dmg = 1.2
-        type_atk = "range"
-        hold_cost = 1
-
-    elif us_char == "Necrophos":
-        hp = 925
-        dmg = 105
-        melee_dmg = 1.26
-        range_dmg = 1.2
-        magic_dmg = 0.8
-        type_atk = "magic"
-        hold_cost = 5
-
-    
+    opp_hp = characters[opp_char][0]
+    opp_dmg = characters[opp_char][1]
+    opp_melee_dmg = characters[opp_char][2]
+    opp_range_dmg = characters[opp_char][3]
+    opp_magic_dmg = characters[opp_char][4]
+    opp_type_atk = characters[opp_char][5]
+    opp_hold_cost = characters[opp_char][6]
 
 
     points = 0
@@ -274,14 +149,13 @@ def fight(us_char, opp_char ):
     while hp > 0 and opp_hp > 0:
         turn += 1
         clear_screen()
-        clear_screen()
-        display_print(f"Ход номер {turn}\n\n")
+        print(f"Ход номер {turn}\n\n")
 
         print(f"Ваши очки навыков: {points} из 5")
 
-        disp_txt(f"Ваше здоровье: {hp} из {max_hp}\n\n\n")
-        disp_txt(f"Очки навыков противника: {opp_points} из 5")
-        disp_txt(f"Здоровье противника: {opp_hp} из {opp_max_hp}\n")
+        print(f"Ваше здоровье: {hp} из {max_hp}\n\n\n")
+        print(f"Очки навыков противника: {opp_points} из 5")
+        print(f"Здоровье противника: {opp_hp} из {opp_max_hp}\n")
 
 
         disp_txt("Выберете действие:")
@@ -328,14 +202,6 @@ def fight(us_char, opp_char ):
 
 
 
-# TODO: акс с зараяженой атакой - крутилкой урон крутилки 200 хп 1500 урон 80                                - не готово
-# TODO: снайпер с заряженой атакой - хедшотом с шансом 30% урон хеда +150 к базовой атаке хп 600 урон 130    - не готово
-# TODO: некр заряженая атака стоит 5 очков, сносит 50% от потерянного хп хп 1000 урон 100                    - не готово
-# TODO: пофиксить повторное выпадение противника                                                             - не готово
-
-
-
-user_character = None # TODO: имя перса стринг
 
 meeted_opponents = set()
 
@@ -355,10 +221,25 @@ def main():
 
 
 
-    display_text("Вы уважаете яндекс?")
+
+
+    display_print("Начать игру?")    
     answer = get_player_choice(["Да", "Нет"])
     if answer == 1:
-        display_print("Респект от Даниила Анашечева")
+        a = True
+        while a:
+            display_print("Введите свой никнейм")
+            nick = input()
+            display_text("Вы уверенны, что ваш никнейм - " + nick + "?")
+            ans = get_player_choice(["Да", "Нет"])
+            if ans == 1:
+                a = False
+
+        
+
+        
+
+        display_print("Удачной игры, " + nick + "!")
 
         us_charact = -1
         while us_charact not in ch:
@@ -371,42 +252,42 @@ def main():
                 print(" Sven: Тип боя - ближний. Тип урона - физический. Класс - физ дамагер.\n"
                     "Герой очень силен против других героев ближнего боя, но слаб против героев с магическим уроном и героев дальнего боя.\n"
                     "Заряженная атака - ценой в 2 очка герой может нанести 130% урона от атаки\n"
-                    "Стартовые характеристики:\nУрон - 130\nЗдоровье - 1010\n\n", 
+                    "Стартовые характеристики:\nУрон - 130\nЗдоровье - 2020\n\n", 
 
                     "Slark: Тип боя - ближний. Тип урона - физический. Класс - физ дамагер.\n"
                     "Герой силен против героев дальнего боя, но слаб против героев с магическим уроном.\n"
                     "Заряженная атака - ценой в 1 очко герой может нанести 10% урона от текущего хп. противника и получить 50% от нанесенного урона\n"
-                    "Стартовые характеристики:\nУрон - 110\nЗдоровье - 1100\n\n", 
+                    "Стартовые характеристики:\nУрон - 110\nЗдоровье - 2200\n\n", 
 
                     "Zeus: Тип боя - дальний. Тип урона - магический. Класс - маг дамагер.\n"
                     "Герой силен против героев ближнего боя, но слаб против героев дальнего.\n"
-                    "Заряженная атака - ценой в 4 очка герой может нанести 140% урона от атаки\n"
-                    "Стартовые характеристики:\nУрон - 230\nЗдоровье - 500\n\n",
+                    "Заряженная атака - ценой в 3 очка герой может нанести 140% урона от атаки\n"
+                    "Стартовые характеристики:\nУрон - 210\nЗдоровье - 1000\n\n",
 
                     "Wraith King: Тип боя - ближний. Тип урона - физический. Класс - танк.\n"
                     "Герой не имеет сильных или слабых сторон.\n"
                     "Заряженная атака - ценой в 2 очка герой может потерять 15% от текущего хп и нанести 200% урона от атаки\n"
-                    "Стартовые характеристики:\nУрон - 90\nЗдоровье - 1200\n\n",
+                    "Стартовые характеристики:\nУрон - 90\nЗдоровье - 2400\n\n",
                     
                     "Drow Ranger: Тип боя - дальний. Тип урона - физический. Класс - физ дамагер.\n"
                     "Герой силен против героев дальнего боя, а так же героев с магическим типом урона, но слаб против героев ближнего боя.\n"
                     "Заряженная атака - ценой в 3 очка герой может нанести 170% урона от атаки\n"
-                    "Стартовые характеристики:\nУрон - 200\nЗдоровье - 700\n\n"
+                    "Стартовые характеристики:\nУрон - 200\nЗдоровье - 1400\n\n"
 
                     "Axe: Тип боя - ближний. Тип урона - физический. Класс - танк.\n"
                     "Герой силен против других героев ближнего боя, слаб против героев с магическим уроном.\n"
                     "Заряженная атака - ценой в 2 очка герой наносит противнику 280 урона\n"
-                    "Стартовые характеристики:\nУрон - 95\nЗдорьвье - 1500\n\n"
+                    "Стартовые характеристики:\nУрон - 95\nЗдорьвье - 2500\n\n"
 
                     "Sniper: Тип боя - дальний. Тип урона - физический. Класс - физ дамагер.\n"
                     "Герой силен против героев ближнего боя, а также героев с магическим уроном. Слаб против героев дальнего боя.\n"
                     "Заряженная атака - ценой в 1 очко герой с шансом 55% наносит противнику 230% урона. В случае неудачи не наносит урона.\n"
-                    "Стартовые характеристики:\nУрон - 140\nЗдорьвье - 700\n\n"
+                    "Стартовые характеристики:\nУрон - 140\nЗдорьвье - 1400\n\n"
 
                     "Necrophos: Тип боя - дальний. Тип урона - магический. Класс - танк.\n"
                     "Герой силен против других героев дальнего боя, а также против героев ближнего боя. Слаб против героев с магическим уроном.\n"
-                    "Заряженная атака - ценой в 5 очков герой наносит противнику 50% от потерянного здоровья.\n"
-                    "Стартовые характеристики:\nУрон - 105\nЗдорьвье - 925\n\n"
+                    "Заряженная атака - ценой в 4 очка герой наносит противнику 50% от потерянного здоровья.\n"
+                    "Стартовые характеристики:\nУрон - 105\nЗдорьвье - 1850\n\n"
                     
                     "Перейти к выбору героя?")
             
@@ -451,7 +332,8 @@ def main():
 
         
 
-        
+        score = 0
+
         num = 0
         while num != 1:
             a = random.randint(0, len(characters) - 2)
@@ -462,6 +344,7 @@ def main():
                 num = 1
 
         if z == 1:
+            score += 1
             num = 0
             while num != 1:
                 a = random.randint(0, 4)
@@ -475,6 +358,7 @@ def main():
             
             if k == 1:
                 display_print("Ваш \"великолепный приз\" - похвала. Спасибо, что сыграли!!!")
+                score += 1
             
             elif k == 0:
                 display_print("Спасибо за игру. Вы очень далеко зашли. Попробуйте еще раз, вдруг получится)")
@@ -483,15 +367,43 @@ def main():
 
 
         elif z == 0:
-            display_print("Спасибо за игру. От вас воняет слабостью. Вы проиграли на обучении)). Хахаххаахха. Попробуйте еще раз)")
+            display_print("Спасибо за игру. Вы проиграли на обучении)). Хахаххаахха. Попробуйте еще раз)")
+
+        data = {}
+
+        with open('nicknames.json', 'w+') as outfile:
+                json.dump(data, outfile)
+
+
         
 
-        display_print("Удачи!!!")
-    
-    else:
-        display_print("Вы не достоины играть в DOTA 0.5")
-    
+        data[nick] = score
 
+        with open('nicknames.json', 'w+') as outfile:
+                json.dump(data, outfile)
+
+
+        display_text("Добавить новый результат?")
+        result = get_player_choice(["Да", "Нет"])
+        
+
+        if result == 1:
+            res = [nick, score]
+            with open("results.csv", "a") as wr_file:
+                writer_object = writer(wr_file)
+                writer_object.writerow(res)
+                wr_file.close()
+                os.remove('nicknames.json')
+
+        elif result == 2:
+            os.remove('nicknames.json')
+
+        
+
+    
+    display_print("Удачи!!!")
+    
+    
 
 
 
