@@ -1,7 +1,7 @@
 from math import *
 from art import tprint
 
-tprint("--------Calculator---------")
+tprint("--------------------------Calculator----------------------------")
 print("Выберете необходимую операцию:")
 print("1.  Сложение")
 print("2.  Вычитание")
@@ -13,6 +13,7 @@ print("7.  Факториал")
 print("8.  Синус")
 print("9.  Косинус")
 print("10. Тангенс\n")
+
 flag = True
 
 while flag == True:
@@ -35,15 +36,9 @@ while flag == True:
     elif operation >= 6 and operation <= 10:
         print("Введите число: ")
         a = float(input())
-        if (operation in [10, 6] and a >= 0) or (operation == 7 and a > 0):
-           flag = False
-        elif operation in [8, 9]:
-            flag = False
-        else:
-            print("Попробуйте еще раз\n")
+        flag = False
     else:
         print("Попробуйте еще раз\n")
-
 
 match operation:
     case 1:
@@ -62,12 +57,10 @@ match operation:
     case 6:
         print("Корень из", a, "= ", sqrt(a))
     case 7:
-        print("Факториал от", a, "= ", factorial(int(a)))
+        print("Факториал от", a, "= ", factorial(a))
     case 8:
         print("sin", a, "=", sin(a))
     case 9:
         print("cos", a, "=", cos(a))
     case 10:
         print("tg", a, "=", tan(a))
-
-
